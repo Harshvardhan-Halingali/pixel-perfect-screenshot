@@ -113,7 +113,7 @@ function Atmosphere({ radius, color, power = 3, intensity = 1.2 }: { radius: num
           void main(){ float f = pow(1. - abs(dot(vN, vV)), p); gl_FragColor = vec4(c, f*i); }`,
         transparent: true,
         blending: THREE.AdditiveBlending,
-        side: THREE.BackSide,
+        side: THREE.FrontSide,
         depthWrite: false,
       }),
     [color, power, intensity],
