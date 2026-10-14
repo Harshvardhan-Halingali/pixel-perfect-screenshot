@@ -53,7 +53,7 @@ function CameraRig({ progress, pointer, reduced }: Props) {
     const s = Math.min(cur.current, 0.99999) * SEGMENTS;
     const i = Math.floor(s);
     const t = smooth(s - i);
-    const A = KEYS[i], B = KEYS[Math.min(i + 1, SEGMENTS)];
+    const A = KEYS[i]!, B = KEYS[Math.min(i + 1, SEGMENTS)]!;
     a.set(...A.pos).lerp(b.set(...B.pos), t);
     // lift the path mid-segment so objects sweep past rather than through
     a.y += Math.sin(t * Math.PI) * 1.5;
@@ -126,7 +126,8 @@ function Atmosphere({ radius, color, power = 3, intensity = 1.2 }: { radius: num
 }
 
 function Planets({ reduced }: { reduced: boolean }) {
-  const [earthTex, moonTex, saturnTex] = useTexture([earthUrl, moonUrl, saturnUrl]);
+  const texs = useTexture([earthUrl, moonUrl, saturnUrl]) as THREE.Texture[];
+  const earthTex = texs[0]!, moonTex = texs[1]!, saturnTex = texs[2]!;
   [earthTex, moonTex, saturnTex].forEach((t) => {
     t.colorSpace = THREE.SRGBColorSpace;
     t.anisotropy = 4;
@@ -138,7 +139,7 @@ function Planets({ reduced }: { reduced: boolean }) {
   const ring = useMemo(() => {
     const inner = 7.6, outer = 14;
     const geo = new THREE.RingGeometry(inner, outer, 160, 1);
-    const pos = geo.attributes.position, uv = geo.attributes.uv, v = new THREE.Vector3();
+    const pos = geo.getAttribute("position"), uv = geo.getAttribute("uv"), v = new THREE.Vector3();
     for (let i = 0; i < pos.count; i++) {
       v.fromBufferAttribute(pos, i);
       uv.setXY(i, (v.length() - inner) / (outer - inner), 0.5);
@@ -213,7 +214,7 @@ function Asteroids({ reduced }: { reduced: boolean }) {
   }, []);
   const geo = useMemo(() => {
     const g = new THREE.IcosahedronGeometry(1, 1);
-    const pos = g.attributes.position;
+    const pos = g.getAttribute("position");
     const v = new THREE.Vector3();
     for (let i = 0; i < pos.count; i++) {
       v.fromBufferAttribute(pos, i);
