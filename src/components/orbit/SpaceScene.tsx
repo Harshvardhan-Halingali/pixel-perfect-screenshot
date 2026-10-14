@@ -10,11 +10,11 @@ import { SEGMENTS } from "./journey";
 type V3 = [number, number, number];
 const KEYS: { pos: V3; look: V3 }[] = [
   { pos: [0, 0.4, 11.5], look: [0, 2.6, 0] },
-  { pos: [-3.8, 0.6, 6.2], look: [1.8, 0.2, -2] },
+  { pos: [-5.2, 0.8, 9.5], look: [2.6, 0.2, -2] },
   { pos: [-1.2, 1.4, -18.5], look: [-8.6, 1.6, -24] },
   { pos: [0.8, 0.2, -44], look: [-0.5, -0.5, -62] },
   { pos: [-3, 3.4, -79], look: [3.4, -0.6, -100] },
-  { pos: [0, 34, -175], look: [0, -14, -262] },
+  { pos: [0, 30, -170], look: [0, -40, -262] },
 ];
 
 const EARTH: V3 = [0, 0, 0];
@@ -119,7 +119,7 @@ function Atmosphere({ radius, color, power = 3, intensity = 1.2 }: { radius: num
     [color, power, intensity],
   );
   return (
-    <mesh scale={1.12} material={mat}>
+    <mesh scale={1.035} material={mat}>
       <sphereGeometry args={[radius, 64, 64]} />
     </mesh>
   );
@@ -174,7 +174,7 @@ function Planets({ reduced }: { reduced: boolean }) {
           <sphereGeometry args={[3, 96, 96]} />
           <meshStandardMaterial map={earthTex} roughness={0.85} metalness={0.05} />
         </mesh>
-        <Atmosphere radius={3} color="#5fd4ff" power={2.6} intensity={1.6} />
+        <Atmosphere radius={3} color="#5fd4ff" power={4} intensity={1.1} />
       </group>
       <mesh ref={moon} position={MOON}>
         <sphereGeometry args={[1.3, 64, 64]} />
@@ -187,7 +187,7 @@ function Planets({ reduced }: { reduced: boolean }) {
             <meshStandardMaterial map={saturnTex} roughness={0.9} />
           </mesh>
         </group>
-        <Atmosphere radius={6} color="#ffc98a" power={3.5} intensity={0.9} />
+        <Atmosphere radius={6} color="#ffc98a" power={5} intensity={0.6} />
         <mesh geometry={ring.geo} rotation={[-Math.PI / 2, 0, 0]}>
           <meshStandardMaterial map={ring.tex} transparent side={THREE.DoubleSide} depthWrite={false} roughness={1} />
         </mesh>

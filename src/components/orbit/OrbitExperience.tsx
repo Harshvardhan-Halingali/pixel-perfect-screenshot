@@ -121,7 +121,7 @@ export function OrbitExperience() {
             return (
               <div key={s.id} className="caption absolute inset-x-0 bottom-[12vh] flex flex-col items-center px-6 text-center" style={style}>
                 <span className="label-tech mb-4 text-primary">{s.label}</span>
-                <h2 className="font-display text-4xl font-extralight tracking-tight md:text-6xl">{s.title}</h2>
+                <h2 className="text-glow font-display text-4xl font-extralight tracking-tight md:text-6xl">{s.title}</h2>
                 <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground md:text-base">{s.body}</p>
                 <button onClick={() => go(0)} className={`btn-orbit mt-8 ${vis ? "pointer-events-auto" : ""}`}>
                   Travel again <span aria-hidden>↺</span>
